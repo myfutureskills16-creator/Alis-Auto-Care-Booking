@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#0b1d3a"/>
+<title>Book a Detail · Ali's Auto Care</title>
+<link rel="manifest" href="/manifest-book.webmanifest"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%230b3d91'/><text x='96' y='128' font-size='110' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='bold'>A</text></svg>"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="Ali Auto Care"/>
+<style>
+:root{
+  --bg:#f5f7fb; --bg-2:#fff; --text:#0b1d3a; --muted:#6b7795;
+  --brand:#0b3d91; --brand-2:#1e63d6; --brand-3:#3b8cff;
+  --line:rgba(15,30,60,.10); --good:#16a34a; --bad:#dc2626;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 500px at 90% -10%, rgba(59,140,255,.20), transparent 60%),
+    radial-gradient(700px 500px at -10% 10%, rgba(11,61,145,.18), transparent 60%),
+    var(--bg);
+}
+.wrap{max-width:680px;margin:0 auto;padding:28px 18px 60px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.mark{width:46px;height:46px;border-radius:14px;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2),var(--brand-3));
+  display:grid;place-items:center;color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 28px rgba(11,61,145,.35);}
+.brand b{font-size:18px;letter-spacing:-.02em}
+.brand .s{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+
+.hero{padding:26px 22px 22px;border-radius:24px;background:linear-gradient(135deg,#0b3d91,#1e63d6 60%,#3b8cff);color:#fff;
+  box-shadow:0 18px 50px rgba(11,61,145,.35);margin-bottom:18px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 50%);pointer-events:none}
+.hero h1{margin:0;font-size:26px;letter-spacing:-.02em}
+.hero p{margin:6px 0 0;opacity:.92;font-size:14px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 8px 30px rgba(11,29,58,.06);margin-bottom:16px}
+h2{margin:0 0 8px;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--brand)}
+.row{display:grid;gap:10px}
+@media(min-width:560px){.row.r2{grid-template-columns:1fr 1fr}}
+.field label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.02em;display:block;margin-bottom:5px}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text);
+  font:inherit;font-size:14px;outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--brand-2);box-shadow:0 0 0 4px rgba(59,140,255,.18)}
+textarea{resize:vertical;min-height:80px}
+
+.pkgs{display:grid;gap:10px}
+@media(min-width:560px){.pkgs{grid-template-columns:1fr 1fr}}
+.pkg{border:2px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;background:#fff;transition:all .15s;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.pkg:hover{border-color:var(--brand-2);transform:translateY(-1px)}
+.pkg.sel{border-color:var(--brand);background:linear-gradient(135deg,rgba(59,140,255,.10),transparent 70%);box-shadow:0 6px 20px rgba(11,61,145,.15)}
+.pkg .t{font-weight:800;font-size:15px}
+.pkg .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+.pkg .p{font-weight:800;color:var(--brand);font-size:16px;white-space:nowrap}
+
+.addon{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;background:#fff}
+.addon.on{border-color:var(--brand);background:rgba(59,140,255,.08)}
+.toggle{width:42px;height:24px;border-radius:999px;background:#cbd5e1;position:relative;transition:.2s}
+.toggle::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:999px;background:#fff;transition:.2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.addon.on .toggle{background:var(--brand-2)}
+.addon.on .toggle::after{left:20px}
+
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slot{padding:10px 6px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-weight:700;font-size:14px;cursor:pointer;text-align:center;transition:.15s}
+.slot:hover{border-color:var(--brand-2)}
+.slot.sel{background:var(--brand);color:#fff;border-color:var(--brand);box-shadow:0 6px 16px rgba(11,61,145,.35)}
+.slot:disabled{opacity:.35;cursor:not-allowed}
+
+.summary{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(11,61,145,.06),rgba(59,140,255,.06));border:1px solid var(--line);margin-bottom:12px}
+.summary .l{font-size:12.5px;color:var(--muted)}
+.summary .p{font-weight:800;font-size:20px;color:var(--brand)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 18px;border-radius:14px;border:none;font:inherit;font-size:15px;font-weight:700;cursor:pointer;width:100%;
+  color:#fff;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  box-shadow:0 12px 28px rgba(11,61,145,.35),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .12s,box-shadow .2s}
+.btn:hover{box-shadow:0 16px 36px rgba(11,61,145,.45)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.err{color:var(--bad);font-size:13px;margin-top:6px;min-height:18px}
+.success{padding:30px 22px;text-align:center}
+.success .check{width:78px;height:78px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#22c55e);margin:0 auto 14px;display:grid;place-items:center;color:#fff;box-shadow:0 12px 30px rgba(22,163,74,.35)}
+.small{font-size:12.5px;color:var(--muted)}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:24px}
+.foot a{color:var(--brand-2);text-decoration:none}
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+.day-warn{color:var(--bad);font-size:12.5px;margin-top:6px;display:none}
+.day-warn.show{display:block}
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M5 14l1.5-4.5A3 3 0 019.34 7h5.32a3 3 0 012.84 2.5L19 14" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="3" y="14" width="18" height="5" rx="2" stroke="#fff" stroke-width="1.7"/>
+        <circle cx="7.5" cy="19" r="1.4" fill="#fff"/><circle cx="16.5" cy="19" r="1.4" fill="#fff"/>
+      </svg>
+    </div>
+    <div><b>Ali's Auto Care</b><div class="s">Book your detail</div></div>
+  </div>
+
+  <div class="hero">
+    <h1>Premium mobile detailing</h1>
+    <p>Pick a package, a time that suits you, and we'll confirm shortly.</p>
+  </div>
+
+  <!-- FORM -->
+  <div id="formView">
+    <div class="card">
+      <h2>1. Choose a package</h2>
+      <div class="pkgs" id="pkgList"></div>
+      <div style="height:12px;"></div>
+      <div style="height:12px;"></div>
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:8px;">Car size</div>
+        <div class="pkgs" id="sizeList">
+          <div class="pkg" data-size="standard" data-testid="size-standard">
+            <div><div class="t">Standard Car</div><div class="d">Hatchback, saloon, estate</div></div>
+            <div class="p">£0</div>
+          </div>
+          <div class="pkg" data-size="large" data-testid="size-large">
+            <div><div class="t">4x4 / SUV / Large</div><div class="d">X5, Range Rover, vans</div></div>
+            <div class="p">+£10</div>
+          </div>
+        </div>
+      </div>
+      <div class="addon" id="addCeramic" data-testid="ceramic-toggle">
+        <div>
+          <div style="font-weight:800;font-size:15px;">Ceramic Coating Add-On</div>
+          <div class="small">Long-lasting glossy protection — adds £10</div>
+        </div>
+        <div class="toggle"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Pick a date &amp; time</h2>
+      <div class="row r2">
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="bDate" data-testid="b-date"/>
+          <div class="day-warn" id="dayWarn">Sorry, we're closed Friday &amp; Saturday — please pick another day.</div>
+        </div>
+        <div class="field">
+          <label>Time</label>
+          <div class="slots" id="slots"></div>
+          <div class="hint">10am – 5pm slots (1 hour each)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Your details</h2>
+      <div class="row r2">
+        <div class="field"><label>Full name *</label><input id="bName" placeholder="e.g. Sarah Hughes" data-testid="b-name"/></div>
+        <div class="field"><label>Mobile number *</label><input id="bPhone" type="tel" inputmode="tel" placeholder="07…" data-testid="b-phone"/></div>
+      </div>
+      <div style="height:10px;"></div>
+      <div class="field"><label>Address (where we're coming to)</label><input id="bAddr" placeholder="Street, postcode" data-testid="b-addr"/></div>
+    </div>
+
+    <div class="card">
+      <h2>4. Vehicle</h2>
+      <div class="row r2">
+        <div class="field"><label>Make</label><input id="bMake" placeholder="e.g. BMW" data-testid="b-make"/></div>
+        <div class="field"><label>Model</label><input id="bModel" placeholder="e.g. 3 Series" data-testid="b-model"/></div>
+      </div>
+      <div style="height:10px;"></div>
+      <div class="field"><label>Registration</label><input id="bReg" placeholder="AB12 CDE" style="text-transform:uppercase" data-testid="b-reg"/></div>
+      <div style="height:10px;"></div>
+      <div class="field"><label>Notes (optional)</label><textarea id="bNotes" placeholder="Anything we should know?" data-testid="b-notes"></textarea></div>
+    </div>
+
+    <div class="card">
+      <h2>5. Payment method</h2>
+      <div class="pkgs" id="payList">
+        <div class="pkg" data-pay="cash" data-testid="pay-cash">
+          <div><div class="t">Cash on the day</div><div class="d">Pay after the wash, in cash.</div></div>
+          <div class="p" style="font-size:22px;">💵</div>
+        </div>
+        <div class="pkg" data-pay="bank" data-testid="pay-bank">
+          <div><div class="t">Bank Transfer</div><div class="d">Pay before — details shown after booking.</div></div>
+          <div class="p" style="font-size:22px;">🏦</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div>
+        <div class="l">Estimated total</div>
+        <div id="summaryPkg" class="small">Select a package</div>
+      </div>
+      <div class="p mono" id="summaryPrice">£0.00</div>
+    </div>
+
+    <button class="btn" id="submitBtn" data-testid="submit-request">Request Booking</button>
+    <div class="err" id="formErr"></div>
+
+    <div class="foot">
+      By submitting, you agree to be contacted by Ali's Auto Care to confirm your booking.
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="successView" style="display:none;" class="card success">
+    <div class="check"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2 style="color:var(--text);text-transform:none;font-size:22px;letter-spacing:-.02em;margin:0 0 6px;">Request received!</h2>
+    <p class="small" style="font-size:14px;">Thank you. Ali will review your request and confirm shortly. You'll receive a text if anything needs to change.</p>
+    <div style="height:14px;"></div>
+    <button class="btn" id="newOne" data-testid="book-another" style="max-width:280px;margin:0 auto;">Book another</button>
+  </div>
+</div>
+
+<script>
+const API = '/api';
+const PACKAGES = [
+  { id:'exterior', name:'Exterior Only', price:45, desc:'Wash, decontaminate, wax & finish.' },
+  { id:'inex',     name:'Interior & Exterior', price:55, desc:'Full inside-out clean & shine.' },
+];
+const CERAMIC_PRICE = 10;
+const SIZE_SURCHARGE = { standard: 0, large: 10 };
+const SIZE_LABEL = { standard: 'Standard', large: '4x4 / Large' };
+const SLOTS = ['10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
+
+const state = {
+  packageId: null,
+  carSize: null,
+  ceramic: false,
+  date: '',
+  time: '',
+  payment: null,
+};
+
+const BANK = {
+  name: "Ali's Auto Care",
+  accountNumber: '94484255',
+  sortCode: '04-00-06',
+};
+
+const $ = (s)=>document.querySelector(s);
+
+// Render packages
+$('#pkgList').innerHTML = PACKAGES.map(p=>`
+  <div class="pkg" data-pkg="${p.id}" data-testid="pkg-${p.id}">
+    <div><div class="t">${p.name}</div><div class="d">${p.desc}</div></div>
+    <div class="p">£${p.price.toFixed(0)}</div>
+  </div>
+`).join('');
+
+document.querySelectorAll('#pkgList .pkg').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    state.packageId = el.dataset.pkg;
+    document.querySelectorAll('#pkgList .pkg').forEach(x=>x.classList.toggle('sel', x===el));
+    updateSummary();
+    renderSlots();
+  });
+});
+
+// Car size selector
+document.querySelectorAll('#sizeList .pkg').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    state.carSize = el.dataset.size;
+    document.querySelectorAll('#sizeList .pkg').forEach(x=>x.classList.toggle('sel', x===el));
+    updateSummary();
+  });
+});
+
+// Payment method selector
+document.querySelectorAll('#payList .pkg').forEach(el=>{
+  el.addEventListener('click', ()=>{
+    state.payment = el.dataset.pay;
+    document.querySelectorAll('#payList .pkg').forEach(x=>x.classList.toggle('sel', x===el));
+  });
+});
+
+// Ceramic toggle
+$('#addCeramic').addEventListener('click', ()=>{
+  state.ceramic = !state.ceramic;
+  $('#addCeramic').classList.toggle('on', state.ceramic);
+  updateSummary();
+});
+
+// Date: only allow Sun, Mon, Tue, Wed, Thu (0,1,2,3,4). Block Fri(5)/Sat(6).
+const dateEl = $('#bDate');
+function pad2(n){return String(n).padStart(2,'0')}
+const today = new Date();
+const earliest = new Date('2026-06-17T00:00:00');
+const min = today > earliest ? today : earliest;
+dateEl.min = `${min.getFullYear()}-${pad2(min.getMonth()+1)}-${pad2(min.getDate())}`;
+
+let dayIntervals = [];
+let dayFull = false;
+const BUFFER = 60;       // 60 minutes between bookings
+const DUR = { exterior: 120, inex: 150 }; // mins
+
+async function loadAvailability(){
+  dayIntervals = []; dayFull = false;
+  if(!state.date){ renderSlots(); return; }
+  try{
+    const r = await fetch(API + '/availability?date=' + encodeURIComponent(state.date));
+    const d = await r.json();
+    dayIntervals = d.intervals || [];
+    dayFull = !!d.full;
+  }catch(_){}
+  renderSlots();
+}
+
+function slotBlocked(slotMin){
+  if(dayFull) return true;
+  const dur = DUR[state.packageId] || 120;
+  const start = slotMin, end = slotMin + dur;
+  for(const iv of dayIntervals){
+    if(!(end + BUFFER <= iv.start || iv.end + BUFFER <= start)) return true;
+  }
+  return false;
+}
+
+function renderSlots(){
+  const html = SLOTS.map(t=>{
+    const [h,m] = t.split(':').map(Number);
+    const min = h*60 + m;
+    const blocked = slotBlocked(min);
+    return `<button type="button" class="slot ${state.time===t && !blocked?'sel':''}" data-time="${t}" data-testid="slot-${t}" ${blocked?'disabled':''}>${t}</button>`;
+  }).join('');
+  $('#slots').innerHTML = html;
+  document.querySelectorAll('.slot').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      state.time = b.dataset.time;
+      document.querySelectorAll('.slot').forEach(x=>x.classList.toggle('sel', x===b));
+    });
+  });
+}
+renderSlots();
+
+function checkDate(){
+  $('#dayWarn').classList.remove('show');
+  if(!dateEl.value){ state.date=''; loadAvailability(); return; }
+  const d = new Date(dateEl.value+'T00:00:00');
+  const dow = d.getDay();
+  if(dow===5 || dow===6){
+    $('#dayWarn').textContent = "Sorry, we're closed Friday & Saturday — please pick another day.";
+    $('#dayWarn').classList.add('show');
+    state.date = ''; dateEl.value = ''; loadAvailability(); return;
+  }
+  if(d < earliest){
+    $('#dayWarn').textContent = "Bookings open from Wednesday 17 June onwards.";
+    $('#dayWarn').classList.add('show');
+    state.date = ''; dateEl.value = ''; loadAvailability(); return;
+  }
+  state.date = dateEl.value;
+  state.time = '';
+  loadAvailability();
+}
+dateEl.addEventListener('change', checkDate);
+
+// Time slots — initial render
+$('#slots').innerHTML = SLOTS.map(t=>`<button type="button" class="slot" data-time="${t}" data-testid="slot-${t}">${t}</button>`).join('');
+document.querySelectorAll('.slot').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    state.time = b.dataset.time;
+    document.querySelectorAll('.slot').forEach(x=>x.classList.toggle('sel', x===b));
+  });
+});
+document.querySelectorAll('.slot').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    state.time = b.dataset.time;
+    document.querySelectorAll('.slot').forEach(x=>x.classList.toggle('sel', x===b));
+  });
+});
+
+function currentPkg(){ return PACKAGES.find(p=>p.id===state.packageId); }
+function currentPrice(){
+  const p = currentPkg();
+  if(!p) return 0;
+  const surcharge = state.carSize ? SIZE_SURCHARGE[state.carSize] : 0;
+  return p.price + surcharge + (state.ceramic ? CERAMIC_PRICE : 0);
+}
+function updateSummary(){
+  const p = currentPkg();
+  if(!p){ $('#summaryPkg').textContent = 'Select a package'; $('#summaryPrice').textContent = '£0.00'; return; }
+  const bits = [p.name];
+  if(state.carSize) bits.push(SIZE_LABEL[state.carSize]);
+  if(state.ceramic) bits.push('Ceramic');
+  $('#summaryPkg').textContent = bits.join(' · ');
+  $('#summaryPrice').textContent = '£' + currentPrice().toFixed(2);
+}
+
+// Submit
+$('#submitBtn').addEventListener('click', async ()=>{
+  const errs = [];
+  if(!state.packageId) errs.push('Please choose a package.');
+  if(!state.carSize) errs.push('Please choose your car size.');
+  if(!state.date) errs.push('Please pick a valid date.');
+  if(!state.time) errs.push('Please pick a time.');
+  if(!state.payment) errs.push('Please choose a payment method.');
+  const name = $('#bName').value.trim();
+  const phone = $('#bPhone').value.trim();
+  if(!name) errs.push('Please enter your full name.');
+  if(!phone) errs.push('Please enter your mobile number.');
+  if(errs.length){ $('#formErr').textContent = errs[0]; return; }
+
+  $('#formErr').textContent = '';
+  $('#submitBtn').disabled = true;
+  $('#submitBtn').textContent = 'Sending…';
+
+  const pkg = currentPkg();
+  const payload = {
+    customer: name,
+    phone: phone,
+    address: $('#bAddr').value.trim(),
+    make: $('#bMake').value.trim(),
+    model: $('#bModel').value.trim(),
+    reg: $('#bReg').value.trim(),
+    packageId: pkg.id,
+    packageName: pkg.name + ' (' + SIZE_LABEL[state.carSize] + ')',
+    carSize: state.carSize,
+    ceramic: state.ceramic,
+    paymentMethod: state.payment,
+    price: currentPrice(),
+    date: state.date,
+    time: state.time,
+    notes: $('#bNotes').value.trim(),
+  };
+  try{
+    const r = await fetch(API + '/requests', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload),
+    });
+    if(!r.ok) throw new Error('Server error');
+    showSuccessView();
+  }catch(e){
+    $('#formErr').textContent = 'Sorry, please try again.';
+    $('#submitBtn').disabled = false;
+    $('#submitBtn').textContent = 'Request Booking';
+    return;
+  }
+});
+
+function showSuccessView(){
+    const total = currentPrice().toFixed(2);
+    const ref = ($('#bName').value.trim().split(' ')[0] || 'BOOKING').toUpperCase();
+    const successEl = document.getElementById('successView');
+    if(state.payment === 'bank'){
+      successEl.innerHTML = `
+        <div class="check"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 style="color:var(--text);text-transform:none;font-size:22px;letter-spacing:-.02em;margin:0 0 6px;">Request received!</h2>
+        <p class="small" style="font-size:14px;">Please make a bank transfer to confirm your booking. Ali will send a confirmation once payment lands.</p>
+        <div style="height:14px;"></div>
+        <div style="text-align:left;background:#f5f7fb;border:1px solid var(--line);border-radius:14px;padding:16px;font-size:14px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span class="small">Sort code</span><b class="mono">${BANK.sortCode}</b></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span class="small">Account number</span><b class="mono">${BANK.accountNumber}</b></div>
+          <div style="display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;margin-top:6px;"><span class="small">Amount</span><b style="color:var(--brand);font-size:18px;">£${total}</b></div>
+        </div>
+        <div style="height:14px;"></div>
+        <button class="btn" id="newOne" data-testid="book-another" style="max-width:280px;margin:0 auto;">Book another</button>`;
+    } else {
+      successEl.innerHTML = `
+        <div class="check"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5 9-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 style="color:var(--text);text-transform:none;font-size:22px;letter-spacing:-.02em;margin:0 0 6px;">Request received!</h2>
+        <p class="small" style="font-size:14px;">Once your detail is complete, payment is <b>${total ? '£'+total : ''} in cash</b> on the day. Ali will confirm your booking shortly.</p>
+        <div style="height:14px;"></div>
+        <button class="btn" id="newOne" data-testid="book-another" style="max-width:280px;margin:0 auto;">Book another</button>`;
+    }
+    document.getElementById('newOne').addEventListener('click', ()=> location.reload());
+    $('#formView').style.display = 'none';
+    successEl.style.display = '';
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+$('#newOne').addEventListener('click', ()=> location.reload());
+
+updateSummary();
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"bc4481b4b62d40aea089131a51a198e8","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
